@@ -11,16 +11,6 @@ import (
 	"strings"
 )
 
-// step 1
-// parse csv into slice of struct containing question and answer
-// range through slice and prompt for answer to each question
-// increment correct/incorrect accordingly
-// at the end of the slice, display the results
-
-// step 2
-// start a timer at the beginning of prompt
-// display result when either timer runs out or when all q's are answered
-
 var problems []Problem
 
 func main() {
