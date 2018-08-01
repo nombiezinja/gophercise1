@@ -51,10 +51,10 @@ func ask() {
 	for _, p := range problems {
 		fmt.Printf("Please enter the answer for this question: %v \n", p.Question)
 		input, _ := reader.ReadString('\n')
-		userAnswer := strToInt(strings.Trim(input, "\n"))
-		standardAnswer := strToInt(p.Answer)
+		err, userAnswer := strToInt(strings.Trim(input, "\n"))
+		_, standardAnswer := strToInt(p.Answer)
 		correct := userAnswer == standardAnswer
-		if correct {
+		if correct && err == nil {
 			result.Correct = result.Correct + 1
 		} else {
 			result.Incorrect = result.Incorrect + 1
@@ -68,12 +68,9 @@ func ask() {
 	)
 }
 
-func strToInt(s string) int {
+func strToInt(s string) (error, int) {
 	var answer int
 	var err error
 	answer, err = strconv.Atoi(s)
-	if err != nil {
-		FailOnError(err, "Answer entered is not a number")
-	}
-	return answer
+	return err, answer
 }
