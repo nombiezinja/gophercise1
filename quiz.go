@@ -12,6 +12,7 @@ import (
 )
 
 var problems []Problem
+var result Result
 
 func main() {
 	csvFile, _ := os.Open("problems.csv")
@@ -34,7 +35,7 @@ func main() {
 }
 
 func ask() {
-	var result Result
+	go timer(3)
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -51,11 +52,7 @@ func ask() {
 		}
 	}
 
-	fmt.Printf(
-		"You've answered %v questions correctly, and %v questions incorrectly \n",
-		result.Correct,
-		result.Incorrect,
-	)
+	printResult()
 }
 
 func strToInt(s string) (error, int) {
