@@ -6,6 +6,7 @@ type Problem struct {
 }
 
 type Result struct {
-	Correct   int
-	Incorrect int
+	Correct    int
+	Incorrect  int
+	Unanswered int
 }

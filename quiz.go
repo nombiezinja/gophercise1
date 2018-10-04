@@ -37,6 +37,7 @@ func main() {
 func ask() {
 	go timer(3)
 
+	result.Unanswered = len(problems)
 	reader := bufio.NewReader(os.Stdin)
 
 	for _, p := range problems {
@@ -45,7 +46,12 @@ func ask() {
 		err, userAnswer := strToInt(strings.Trim(input, "\n"))
 		_, standardAnswer := strToInt(p.Answer)
 		correct := userAnswer == standardAnswer
-		if correct && err == nil {
+
+		if err == nil {
+			result.Unanswered = result.Unanswered - 1
+		}
+
+		if correct {
 			result.Correct = result.Correct + 1
 		} else {
 			result.Incorrect = result.Incorrect + 1
