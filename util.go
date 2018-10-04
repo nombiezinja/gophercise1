@@ -10,3 +10,10 @@ func parseTimeLimit() int {
 	FailOnError(err, "Failed to parse commandline argument for time limit")
 	return t
 }
+
+func strToInt(s string) (error, int) {
+	var a int
+	var err error
+	a, err = strconv.Atoi(s)
+	return err, a
+}
