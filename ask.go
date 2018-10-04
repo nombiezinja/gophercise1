@@ -8,7 +8,9 @@ import (
 )
 
 func ask() {
-	go timer(3)
+
+	timeLimit := parseTimeLimit()
+	go timer(timeLimit)
 
 	result.Unanswered = len(problems)
 	reader := bufio.NewReader(os.Stdin)
@@ -16,7 +18,8 @@ func ask() {
 	for _, p := range problems {
 		fmt.Printf("Please enter the answer for this question: %v \n", p.Question)
 		input, _ := reader.ReadString('\n')
-		err, userAnswer := strToInt(strings.Trim(input, "\n"))
+		normalized := normalize(input)
+		err, userAnswer := strToInt(strings.Trim(normalized, "\n"))
 		_, standardAnswer := strToInt(p.Answer)
 		correct := userAnswer == standardAnswer
 
